@@ -1,6 +1,3 @@
-Code to simulate replication timing in the mouse or human genome. 
-
-
 ## Simulating DNA replication in mammalian genomes (RT-Sim)
 
 ### Sample execution:
