@@ -29,8 +29,8 @@ arg | required | detail
 ### Bash environment variables: 
 $GENOMES  \
 Path to a genomes folder. Must contain a sub-folder for the genome passed via -g to run_allCSmodel.R. \
-Subfolder should contain two files : \
-1) genome.fa - a FASTA file of the genome \
+Subfolder should contain two files : 
+1) genome.fa - a FASTA file of the genome 
 2) genome.fa.fai - a FASTA index file (use bedtools faidx) 
 
 ### Requirements: 
