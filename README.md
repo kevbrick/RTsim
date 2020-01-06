@@ -2,7 +2,7 @@
 
 ### Sample execution:
 
-Rscript run_allCSmodel.R -i output.stats -t 1000 -c 3 -n 0.15 -b experimentalRT.bedgraph -o origins.bedgraph -g hg38\
+Rscript run_allCSmodel.R -i output.stats -t 1000 -c 3 -n 0.15 -b experimentalRT.bedgraph -o origins.bedgraph -g hg38
 
 ### Command line args:
 arg | required | detail
