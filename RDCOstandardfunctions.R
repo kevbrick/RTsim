@@ -2,16 +2,6 @@
 ### KB June 29 2018
 #############################
 
-scriptFolder    <- paste0(Sys.getenv('SHARE'),'/code/R/')
-imgOutputFolder <- paste0(Sys.getenv('RFIGS'),'/')
-
-## Fix double slashes in foldernames
-scriptFolder    <- gsub('//','/',scriptFolder)
-imgOutputFolder <- gsub('//','/',imgOutputFolder)
-
-## Load bioconductor (## NOT USED CURRENTLY)
-#source('http://bioconductor.org/biocLite.R')
-
 ## Load libraries
 library(plyr)
 library(dplyr)

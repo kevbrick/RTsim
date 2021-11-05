@@ -7,8 +7,6 @@ library(gganimate)
 library(Metrics)
 library(plyr)
 
-#source('RDCOstandardfunctions.R')
-
 ######################## DEFINE FUNCTIONS ############################
 ######################################################################
 ### Generate a randomString
@@ -52,7 +50,7 @@ getMASE = function(m, o){
 
 ######################################################################
 ### Function to randomly subset origins
-getRandomOrigins <- function (inDF,numForks, useStrength = TRUE){
+getRandomOrigins <- function (inDF,numForks, useStrength = TRUE, seed = NULL){
   
   if (!useStrength){
     inDF$strength <- 1
@@ -60,6 +58,10 @@ getRandomOrigins <- function (inDF,numForks, useStrength = TRUE){
   
   if (dim(inDF)[1] == numForks){
     return(inDF$rFrom)
+  }
+  
+  if (!is.null(seed)){
+    set.seed(seed)
   }
   
   return(sample(inDF$rFrom,
@@ -550,8 +552,8 @@ testModelVData <- function(oMod,
   csOK       <- modelDF$whatCS %in% goodCSList
   
   ## Get correlations & other stats
-  print(sum(vRT[csOK]))
-  print(sum(sim2use[csOK]))
+  #print(sum(vRT[csOK]))
+  #print(sum(sim2use[csOK]))
   
   nR2   <- round(cor(vRT[csOK], sim2use[csOK], use='complete.obs')^2,3)
   dfR2  <- correlationByGroup(data.frame(rt=vRT,sim=sim2use,cs=modelDF$whatCS),"rt","sim","cs")
