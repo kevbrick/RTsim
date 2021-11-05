@@ -1,27 +1,30 @@
 ## Simulating DNA replication in mammalian genomes (RT-Sim)
 
-### Sample execution:
+### Sample execution (to test script):
+Rscript run_allCSmodel.R -i output.stats -t 200 -c 3 -n 0.15 -b mm10_ESC.sampleRT.bedgraph -o mm10.sample_origins.bedgraph
 
-Rscript run_allCSmodel.R -i output.stats -t 1000 -c 3 -n 0.15 -b experimentalRT.bedgraph -o origins.bedgraph -g hg38
+##### NOTE
+Sample RT (mm10_ESC.sampleRT.bedgraph) and origins files (mm10.sample_origins.bedgraph) are included in the repo.
 
 ### Command line args:
 arg | required | detail
 --- | --- | --------------------------------
--b  | *   | Replication timing BEDGRAPH file (for exact format, see below)
+-b  |  *  | Replication timing BEDGRAPH file (for exact format, see below)
 -c  |     | Total number of haploid genomes to simulate (default = 500)
 -d  |     | DSB hotspots BEDGRAPH (NOT USED CURRENTLY)
 -e  |     | Modelling run time (default: not used)
 -f  |     | Percent replicating cells (default: not used)
 -g  |     | Genome (default = mm10)
--i  |   * | Output ID 
+-i  |  *  | Output ID 
 -m  |     | Save model (default = FALSE)
--n  |   * |Origins per Mb (default = 0.2)
--o  |   * |Origins BEDGRAPH file (column 4 in BEDGRAPH should be origin efficiency)
+-n  |  *  | Origins per Mb (default = 0.2)
+-o  |  *  | Origins BEDGRAPH file (column 4 in BEDGRAPH should be origin efficiency)
 -r  |     | "Recycle" replication machinery (default = TRUE)
 -s  |     | Use origin efficiency to weight random selection (default = TRUE)
--t  |   * | Modelling cycles (default = 8000)
+-t  |  *  | Modelling cycles (default = 8000)
 -u  |     | Output prefix
 -v  |     | Exclude chromosome (NOT TESTED)
+-w  |     | Random seed (all sims will give the same result)
 -x  |     | Single chromosome (NOT TESTED)
 -y  |     | Image output folder
 -z  |     | Output RDS file (default = FALSE)

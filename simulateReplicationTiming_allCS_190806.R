@@ -31,6 +31,7 @@ simRT_buildModel <- function (repRate         = 1, ## Kb per minute
                               simOriSeq       = FALSE,
                               noSexChrom      = TRUE,
                               verbose         = FALSE,
+                              randseed        = NULL,
                               okOut           = NULL){
 
   modelParams <- as.list(environment(), all=TRUE)
@@ -238,7 +239,8 @@ simRT_buildModel <- function (repRate         = 1, ## Kb per minute
     
     randOri <- getRandomOrigins(inDF = oriCS,
                                 numForks = numOri,
-                                useStrength = useOriStrength)
+                                useStrength = useOriStrength,
+                                seed = randseed)
     
     randOriginPositions <- sort(match(randOri,table = mDataFrom))
     oriForThisCell <- oriForThisCell[!(oriCS$rFrom %in% mDataFrom[randOriginPositions]),]
@@ -269,9 +271,13 @@ simRT_buildModel <- function (repRate         = 1, ## Kb per minute
     randomTimeToAbortSim <- sample(1:reps,1)
     
     if (verbose){
-      print(paste0("Cell ",nReps," of ",nReplicatingCells,
-                  " ... [OKabort = ",randomTimeToAbortSim,
-                  ' of ',reps,']'))
+      if (is.null(okOut)) {
+        print(paste0("Cell ",nReps," of ",nReplicatingCells,
+                    " ... [OK-seq - abort = ",randomTimeToAbortSim,
+                    ' of ',reps,']'))
+      }else{
+        print(paste0("Cell ",nReps," of ",nReplicatingCells))
+      }
     }
 
     ## Generate coverage @ origin
@@ -301,10 +307,11 @@ simRT_buildModel <- function (repRate         = 1, ## Kb per minute
       
       #terSites <- allForks$pos[allForks$ok & mDataSim[allForks$pos]]
       #print(paste0(length(terSites),' forks will stop this cycle [',x,']'))
-                               
+      
+      ## THIS IS WHERE WE COLLAPSE FORKS
       allForks$ok <- !(mDataSim[allForks$pos])           & 
                      !(modelDF$boundaries[allForks$pos]) &
-                       allForks$pos > 0                  & 
+                       allForks$pos > 1                  & 
                        allForks$pos < length(mDataType)  & 
                        allForks$ok
       
@@ -374,7 +381,8 @@ simRT_buildModel <- function (repRate         = 1, ## Kb per minute
           ## Pick new origins
           randOri <- getRandomOrigins(inDF = oriForThisCell,
                                       numForks = numNewOris,
-                                      useStrength = useOriStrength)
+                                      useStrength = useOriStrength,
+                                      seed = randseed)
           
           randOriNew <- sort(match(randOri,table = mDataFrom))
           
