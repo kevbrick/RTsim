@@ -32,7 +32,7 @@ Sys.setenv(RTSCRIPTS = getwd())
 if (is.null(opt$imgOut)){
 	imgOutputFolder <- paste0(getwd(),'/')
 }else{
-	imgOutputFolder <- paste0(opts$imgOut,'/')
+	imgOutputFolder <- paste0(opt$imgOut,'/')
 }
 
 source(paste0(Sys.getenv('RTSCRIPTS'),'/RDCOstandardfunctions.R'))
